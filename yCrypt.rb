@@ -1,3 +1,6 @@
+#!/bin/env ruby
+# encoding: utf-8
+
 require 'digest'
 #require 'pry' #debugger
 
@@ -40,9 +43,9 @@ class Crypt
     return "Usuário não encontrado" if register.nil?
 
     base_password = register.split("|").last
-    password = yHash(password, type) if type
 
-    status = (base_password == password) ? "Válido" : "Senha Incorreta"
+    password = yHash(password, type) if type    
+    status = (base_password.chomp == password.chomp) ? "Válido" : "Senha Incorreta"
     
     time = elapsed_time
 
@@ -62,7 +65,7 @@ class Crypt
        Digest::MD5.new
     end 
 
-    return encriptAlg.hexdigest
+    return encriptAlg.hexdigest str.chomp
   end
 
   def elapsed_time
