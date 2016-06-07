@@ -6,6 +6,8 @@ require 'digest'
 
 class Crypt  
 
+  # Inicializa classe
+  # base: nome do arquivo, deve estar no dir base/
   def initialize(base)    
     file = File.read("base/#{base}.txt") 
 
@@ -13,6 +15,8 @@ class Crypt
     @start = Time.now
   end 
 
+  # Encrypta toda base previamente inicializada
+  # type: "md5" | "sha1" | "sha256"
   def yCryptAll(type)
     ret = File.new("base/base_encript-#{type}.txt", "w+")    
 
@@ -30,6 +34,9 @@ class Crypt
     return "#{type}: Senhas criptografadas. (#{elapsed_time} ms)"  
   end
 
+  # Valida credencial na base inicializada.
+  # credential: user|senha, string
+  # type:  "md5" | "sha1" | "sha256"
   def validate(credential, type=false)
     puts "~ Validando com criptografia: #{type}"
     return "Nenhuma credential informada." if credential.nil?
